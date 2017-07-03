@@ -23,20 +23,20 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
     <script type="text/javascript">
     function change_page(){
-        window.location.href="/sql/php/order.php"
+        window.location.href="/sql/php/orderr.php"
     };
-    $(document).ready(function(){
-        $($(this).attr('id')).click(function(){
-            $.ajax({
-                url: "#",
-                method:"post",
-                data:"data",
-                success:function(){
-                    print("sdsf");
-                },
-            });
-        });
-    });
+    // $(document).ready(function(){
+    //     $($(this).attr('id')).click(function(){
+    //         $.ajax({
+    //             url: "delete.php",
+    //             method:"post",
+    //             data:"data",
+    //             success:function(){
+    //                 alert("sdsf");
+    //             },
+    //         });
+    //     });
+    // });
     </script>
 </head>
 <body>
@@ -54,11 +54,12 @@
                     <th>联系人</th>
                     <th>联系电话</th>
                     <th>订购</th>
+                    <th>数量</th>
                     <th>操作</th>
                 </tr>
             </thead>
             <tbody>
-                <form action="order.php" method="post">
+                <form action="behind.php" method="post">
             <?php
                 $db = mysqli_connect("localhost","root","11111111","book");
                 $sql_select = "SELECT * FROM textbook";
@@ -66,7 +67,7 @@
                 $result = mysqli_fetch_all($resule);
                 foreach ($result as $key => $value):
             ?>
-                    <tr id="<?= $value[0] ?>">
+                    <tr>
                         <th><?= $value[0] ?></th>
                         <th><?= $value[1] ?></th>
                         <th><?= $value[2] ?></th>
@@ -74,20 +75,16 @@
                         <th><?= $value[4] ?></th>
                         <th><?= $value[5] ?></th>
                         <th><?= $value[6] ?></th>
-                        <th><input type="submit" value="订购"></th>
-                        <th><input type="button" id="less<?= $value[0] ?>" value="删除书籍"></th>
+                        <th><input type="submit" name="order" value="<?= $value[0] ?>"></th>
+                        <th><input type="text" name="number" placeholder="请输入订购数量。。。"></th>
+                        <th><input type="submit" name="delete" value="<?= $value[0] ?>">删除书籍</th>
                     </tr>
             <?php endforeach; ?>
                 </form>
             </tbody>
         </table>
-        <input type="submit" style="margin-left:85%;" value="确定">
-        <input type="button" value="添加书籍">
+        <button style="margin-left:85%;" onclick="change_page()">确定订购</button>
+        <button style="margin-left:85%;">添加书籍</button>
     </div>
-    <?php 
-        if(method=="post"){
-            echo 'data';
-        };
-    ?>
 </body>
 </html>

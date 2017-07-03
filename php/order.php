@@ -9,9 +9,7 @@
     <hr>
     123
     <?php 
-        $number = $_POST["number"];
-        $id = $_POST["id"];
-        var_dump($number);
+        $id = $_POST["delete"];
         var_dump($id);
     ?>
 </body>
